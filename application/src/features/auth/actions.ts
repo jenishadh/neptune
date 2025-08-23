@@ -4,7 +4,7 @@ import z from "zod";
 import bcrypt from "bcryptjs";
 import { redirect } from "next/navigation";
 
-import { db } from "@/db";
+import { db } from "@/db/index";
 import { users } from "@/db/schema";
 
 import { createSession, deleteSession } from "@/lib/session";
