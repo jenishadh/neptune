@@ -1,0 +1,27 @@
+import { MaxWidthWrapper } from '@/components/max-width-wrapper'
+import { getSongs } from '@/features/admin/queries'
+import { SongColumn } from '@/features/admin/schemas'
+import { AdminClient } from '@/features/admin/components/admin-client'
+
+export default async function SongsPage() {
+  const songs = await getSongs()
+
+  const formattedSongs: SongColumn[] = songs.map((item) => ({
+    id: item.id,
+    title: item.title,
+    artist: item.artist,
+    album: item.album,
+    genre: item.genre,
+    year: item.year,
+    duration: item.duration, 
+    url: item.url
+  }))
+
+  return (
+    <section className='py-6 md:py-10'>
+      <MaxWidthWrapper>
+        <AdminClient data={formattedSongs} />
+      </MaxWidthWrapper>
+    </section>
+  )
+}

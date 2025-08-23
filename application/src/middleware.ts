@@ -5,7 +5,7 @@ import { cookies } from 'next/headers';
 // 1. Specify protected and public routes
 const protectedRoutes = ['/profile'];
 const authRoutes = ['/login', '/register'];
-const adminRoutes = ['/admin'];
+const adminRoute = '/admin';
 
 export default async function middleware(req: NextRequest) {
   const cookieStore = await cookies();
@@ -14,7 +14,7 @@ export default async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
   const isProtectedRoute = protectedRoutes.includes(path);
   const isAuthRoute = authRoutes.includes(path);
-  const isAdminRoute = adminRoutes.includes(path);
+  const isAdminRoute = path.startsWith(adminRoute);
 
   // 3. Decrypt the session from the cookie
   const cookie = cookieStore.get('session')?.value;

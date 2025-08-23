@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
 import { Navbar } from "@/components/navbar";
+import { Toaster } from "@/components/ui/sonner";
 
 import "./globals.css";
 
@@ -26,6 +27,7 @@ export default function RootLayout({
         <main className="flex-1">
           {children}
         </main>
+        <Toaster />
       </body>
     </html>
   );
