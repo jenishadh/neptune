@@ -8,7 +8,8 @@ import {
   Plus,
   ShieldCheck,
   Edit,
-  Trash
+  Trash,
+  User
 } from "lucide-react"
 
 export const Icons = {
@@ -21,5 +22,6 @@ export const Icons = {
   plus: Plus,
   shieldCheck: ShieldCheck,
   edit: Edit,
-  trash: Trash
+  trash: Trash,
+  user: User
 }

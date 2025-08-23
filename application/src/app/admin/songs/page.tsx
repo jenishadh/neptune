@@ -1,7 +1,7 @@
 import { MaxWidthWrapper } from '@/components/max-width-wrapper'
-import { getSongs } from '@/features/admin/queries'
-import { SongColumn } from '@/features/admin/schemas'
-import { AdminClient } from '@/features/admin/components/admin-client'
+import { getSongs } from '@/features/admin/songs/queries'
+import { SongColumn } from '@/features/admin/songs/schemas'
+import { AdminClient } from '@/features/admin/songs/components/admin-client'
 
 export default async function SongsPage() {
   const songs = await getSongs()

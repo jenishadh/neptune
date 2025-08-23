@@ -7,9 +7,9 @@ import { Separator } from '@/components/ui/separator'
 import { Icons } from '@/components/icons'
 import { Header } from '@/components/header'
 
-import { columns } from '@/features/admin/table/columns'
-import { DataTable } from '@/features/admin/table/data-table'
-import { SongClientProps } from '@/features/admin/schemas'
+import { columns } from '@/features/admin/songs/table/columns'
+import { DataTable } from '@/features/admin/songs/table/data-table'
+import { SongClientProps } from '@/features/admin/songs/schemas'
 
 export function AdminClient({ data }: SongClientProps) {
   const router = useRouter()

@@ -1,6 +1,6 @@
 import { MaxWidthWrapper } from "@/components/max-width-wrapper"
-import { EditSongForm } from "@/features/admin/components/edit-song-form"
-import { getSong } from "@/features/admin/queries";
+import { EditSongForm } from "@/features/admin/songs/components/edit-song-form"
+import { getSong } from "@/features/admin/songs/queries";
 
 export default async function EditSong({ params }: { params: Promise<{ songId: string }> }) {
   const { songId } = await params;

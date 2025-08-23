@@ -1,5 +1,5 @@
 import { MaxWidthWrapper } from "@/components/max-width-wrapper"
-import { AddSongForm } from "@/features/admin/components/add-song-form"
+import { AddSongForm } from "@/features/admin/songs/components/add-song-form"
 
 export default function AddSong() {
   return (

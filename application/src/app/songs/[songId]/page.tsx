@@ -1,6 +1,6 @@
 import { MaxWidthWrapper } from "@/components/max-width-wrapper"
 import { Card } from "@/components/ui/card";
-import { getSong } from "@/features/admin/queries";
+import { getSong } from "@/features/admin/songs/queries";
 
 export default async function EditSong({ params }: { params: Promise<{ songId: string }> }) {
   const { songId } = await params;

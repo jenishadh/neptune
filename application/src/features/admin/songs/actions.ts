@@ -1,12 +1,12 @@
 "use server";
 
 import z from "zod";
+import { eq } from "drizzle-orm";
 
 import { db } from "@/db/index";
 import { songs } from "@/db/schema";
 
 import { songSchema, updateSongSchema } from "./schemas";
-import { eq } from "drizzle-orm";
 
 export async function addSong(data: z.infer<typeof songSchema>) {
   try {

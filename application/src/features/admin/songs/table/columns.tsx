@@ -2,7 +2,7 @@
 
 import type { ColumnDef } from '@tanstack/react-table'
 
-import { SongColumn } from '@/features/admin/schemas'
+import { SongColumn } from '@/features/admin/songs/schemas'
 import Link from 'next/link'
 import { CellAction } from './cell-action'
 

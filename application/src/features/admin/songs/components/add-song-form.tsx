@@ -4,6 +4,8 @@ import { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { useRouter } from "next/navigation"
+import { toast } from "sonner"
 
 import { Alert, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
@@ -18,64 +20,40 @@ import {
 import { Input } from "@/components/ui/input"
 import { Icons } from "@/components/icons"
 import { Card, CardContent } from "@/components/ui/card"
-import { songSchema } from "../schemas"
-import { useRouter } from "next/navigation"
 import { Header } from "@/components/header"
-import { toast } from "sonner"
-import { updateSong } from "../actions"
 
-type EditSongFormProps = {
-  data: {
-    id: string
-    title: string
-    artist: string
-    album: string
-    genre: string
-    year: string
-    duration: string
-    url: string
-  }
-}
+import { songSchema } from "@/features/admin/songs/schemas"
+import { addSong } from "@/features/admin/songs/actions"
 
-export function EditSongForm({ data }: EditSongFormProps) {
+export function AddSongForm() {
   const router = useRouter()
   const [error, setError] = useState<string | null>(null)
 
   const form = useForm<z.infer<typeof songSchema>>({
     resolver: zodResolver(songSchema),
     defaultValues: {
-      title: data.title,
-      artist: data.artist,
-      album: data.album,
-      genre: data.genre,
-      year: data.year,
-      duration: data.duration,
-      url: data.url
+      title: "",
+      artist: "",
+      album: "",
+      genre: "",
+      year: "",
+      duration: "",
+      url: "",
     },
   })
 
   const pending = form.formState.isSubmitting
 
-  async function onSubmit(values: z.infer<typeof songSchema>) {
+  async function onSubmit(data: z.infer<typeof songSchema>) {
     setError(null)
     try {
-      const result = await updateSong({
-        id: data.id,
-        title: values.title,
-        artist: values.artist,
-        album: values.album,
-        genre: values.genre,
-        year: values.year,
-        duration: values.duration,
-        url: values.url
-      })
+      const result = await addSong(data)
       if (!result?.success) {
         setError(result.message)
       }
-      if (result?.success) {
+      if(result?.success) {
         toast.success(result.message)
         form.reset()
-        router.push("/admin/songs")
       }
       return
     } catch {
@@ -86,8 +64,8 @@ export function EditSongForm({ data }: EditSongFormProps) {
   return (
     <div className="max-w-3xl mx-auto space-y-6">
       <Header
-        title="Edit Song"
-        description="Edit the song in the system."
+        title="Add Song"
+        description="Add new song in the system."
         icon={Icons.music}
       >
         <Button onClick={() => router.back()} variant="outline">
@@ -228,7 +206,7 @@ export function EditSongForm({ data }: EditSongFormProps) {
               )}
               <Button type="submit" className="w-full" disabled={pending}>
                 {pending && <Icons.loaderCircle className="size-4 animate-spin" />}{" "}
-                Save Changes
+                Submit
               </Button>
             </form>
           </Form>
