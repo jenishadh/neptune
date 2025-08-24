@@ -9,7 +9,8 @@ import {
   ShieldCheck,
   Edit,
   Trash,
-  User
+  User,
+  LogOut
 } from "lucide-react"
 
 export const Icons = {
@@ -23,5 +24,6 @@ export const Icons = {
   shieldCheck: ShieldCheck,
   edit: Edit,
   trash: Trash,
-  user: User
+  user: User,
+  logOut: LogOut
 }
