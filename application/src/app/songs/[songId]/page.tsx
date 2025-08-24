@@ -7,11 +7,21 @@ import { verifySession } from '@/lib/session';
 import { db } from '@/db/index';
 import { savedSongs } from '@/db/schema';
 import { and, eq } from 'drizzle-orm';
+import { RecommendedSongs } from '@/features/songs/components/recommended-songs';
+import { recommendSongs } from '@/features/songs/actions';
 
 export default async function SongPage({ params }: { params: Promise<{ songId: string }> }) {
   const { songId } = await params;
   const result = await getSong(songId);
   const { userId } = await verifySession()
+  const songs = await recommendSongs(songId);
+
+  const formattedSongs = songs.map((item) => ({
+    id: item.song.id,
+    title: item.song.title,
+    artist: item.song.artist,
+    similarity: item.similarity
+  }))
 
   if (!result) return <div className="text-center py-20 text-gray-500">Song not found.</div>;
 
@@ -40,8 +50,9 @@ export default async function SongPage({ params }: { params: Promise<{ songId: s
 
   return (
     <section className='py-6 md:py-10'>
-      <MaxWidthWrapper>
+      <MaxWidthWrapper className="space-y-6">
         <SongClient song={song} isAlreadySaved={!!alreadySaved} />
+        <RecommendedSongs songs={formattedSongs} />
       </MaxWidthWrapper>
     </section>
   )
