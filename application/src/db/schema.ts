@@ -1,6 +1,8 @@
+import { relations } from "drizzle-orm";
 import {
   pgEnum,
   pgTable,
+  primaryKey,
   text,
   timestamp,
   uuid,
@@ -33,3 +35,38 @@ export const songs = pgTable("songs", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
+
+// Saved Songs Table
+export const savedSongs = pgTable("saved_songs", {
+  userId: uuid("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  songId: uuid("song_id")
+    .notNull()
+    .references(() => songs.id, { onDelete: "cascade" }),
+  createdAt: timestamp("created_at").notNull().defaultNow()
+}, (table) => [
+  primaryKey({ columns: [table.userId, table.songId] })
+]);
+
+// User Relations: One User has Many SavedSongs
+export const userRelations = relations(users, ({ many }) => ({
+  userSongs: many(savedSongs),
+}));
+
+// Song Relations: One Song can be in Many SavedSongs
+export const songRelations = relations(songs, ({ many }) => ({
+  userSongs: many(savedSongs),
+}));
+
+// SavedSongs Relations: A single entry in savedSongs links One User to One Song
+export const savedSongsRelations = relations(savedSongs, ({ one }) => ({
+  user: one(users, {
+    fields: [savedSongs.userId],
+    references: [users.id],
+  }),
+  song: one(songs, {
+    fields: [savedSongs.songId],
+    references: [songs.id],
+  }),
+}));

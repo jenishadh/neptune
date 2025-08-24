@@ -1,27 +1,47 @@
-import { MaxWidthWrapper } from "@/components/max-width-wrapper"
-import { Card } from "@/components/ui/card";
-import { getSong } from "@/features/admin/songs/queries";
 
-export default async function EditSong({ params }: { params: Promise<{ songId: string }> }) {
+import { MaxWidthWrapper } from '@/components/max-width-wrapper'
+
+import { getSong } from "@/features/songs/queries"
+import SongClient from '@/features/songs/components/song-client'
+import { verifySession } from '@/lib/session';
+import { db } from '@/db/index';
+import { savedSongs } from '@/db/schema';
+import { and, eq } from 'drizzle-orm';
+
+export default async function SongPage({ params }: { params: Promise<{ songId: string }> }) {
   const { songId } = await params;
-  const song = await getSong(songId);
+  const result = await getSong(songId);
+  const { userId } = await verifySession()
 
-  if(!song) {
-    return (
-      <section className="py-6 md:py-10">
-        <MaxWidthWrapper>
-          <h1 className="text-2xl font-bold">Song not found</h1>
-        </MaxWidthWrapper>
-      </section>
-    )
+  if (!result) return <div className="text-center py-20 text-gray-500">Song not found.</div>;
+
+  const song = {
+    id: songId,
+    userId: userId!,
+    title: result.title,
+    artist: result.artist,
+    album: result.album,
+    year: result.year,
+    duration: result.duration,
+    genre: result.genre,
+    url: result.url
   }
 
+  // Check if already saved
+  const [alreadySaved] = await db
+    .select()
+    .from(savedSongs)
+    .where(
+      and(
+        eq(savedSongs.userId, userId!),
+        eq(savedSongs.songId, songId)
+      )
+    );
+
   return (
-    <section className="py-6 md:py-10">
+    <section className='py-6 md:py-10'>
       <MaxWidthWrapper>
-        <Card>
-          {JSON.stringify(song, null, 2)}
-        </Card>
+        <SongClient song={song} isAlreadySaved={!!alreadySaved} />
       </MaxWidthWrapper>
     </section>
   )
