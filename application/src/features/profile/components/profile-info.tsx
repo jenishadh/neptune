@@ -1,13 +1,13 @@
 "use client"
 
-import { Calendar } from "lucide-react"
+import { format } from "date-fns"
 
 import { Card, CardContent } from "@/components/ui/card"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Logout } from "@/components/logout"
 
 import { ProfileInfoProps } from "@/features/profile/schemas"
-import { format } from "date-fns"
+import { Icons } from "@/components/icons"
 
 export function ProfileInfo({ userData }: ProfileInfoProps) {
 
@@ -29,7 +29,7 @@ export function ProfileInfo({ userData }: ProfileInfoProps) {
         </div>
 
         <div className="flex items-center justify-center gap-2 text-sm text-gray-500">
-          <Calendar className="w-4 h-4" />
+          <Icons.calendar className="w-4 h-4" />
           <span>Joined {format(userData.joinDate, 'MMMM do, yyyy')}</span>
         </div>
 

@@ -1,22 +1,17 @@
 "use client"
 
 import Link from 'next/link'
-import { ExternalLink, Heart } from 'lucide-react'
-
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { buttonVariants } from '@/components/ui/button'
-
-import { SongSchema } from '../schemas'
-import { Button } from '@/components/ui/button';
-import { remove } from '@/features/songs/actions';
 import { startTransition } from 'react'
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation'
 
-type SavedSongsProps = {
-  userId: string
-  savedSongs: SongSchema[]
-}
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { buttonVariants } from '@/components/ui/button'
+import { Icons } from '@/components/icons';
+
+import { SavedSongsProps } from '@/features/profile/schemas'
+import { Button } from '@/components/ui/button';
+import { remove } from '@/features/songs/actions';
 
 export function SavedSongs({ userId, savedSongs }: SavedSongsProps) {
   const router = useRouter()
@@ -42,7 +37,7 @@ export function SavedSongs({ userId, savedSongs }: SavedSongsProps) {
       <Card className="bg-white border-gray-200">
         <CardHeader>
           <CardTitle className="text-gray-900 flex items-center gap-2">
-            <Heart className="w-5 h-5" fill="red" stroke="red" />
+            <Icons.heart className="w-5 h-5" fill="red" stroke="red" />
             Saved Songs
           </CardTitle>
           <CardDescription className="text-gray-600">Your favorite music discoveries</CardDescription>
@@ -50,7 +45,7 @@ export function SavedSongs({ userId, savedSongs }: SavedSongsProps) {
         <CardContent className="space-y-4">
           {savedSongs.length === 0 ? (
             <div className="text-center py-12">
-              <Heart className="w-12 h-12 text-gray-300 mx-auto mb-4" fill="red" stroke="red" />
+              <Icons.heart className="w-12 h-12 text-gray-300 mx-auto mb-4" fill="red" stroke="red" />
               <p className="text-gray-500 text-lg mb-2">No saved songs yet</p>
               <p className="text-gray-400 text-sm">Start recognizing music and save your favorites!</p>
             </div>
@@ -72,8 +67,8 @@ export function SavedSongs({ userId, savedSongs }: SavedSongsProps) {
                         size: "sm"
                       })}
                     >
-                      <ExternalLink className="w-4 h-4" />
-                      Open in Youtube
+                      <Icons.externalLink className="w-4 h-4" />
+                      Youtube
                     </Link>
                     <Button variant="outline" size="sm" onClick={() => removeSong(userId, song.id)}>
                       Remove

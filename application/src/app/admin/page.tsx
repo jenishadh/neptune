@@ -14,7 +14,7 @@ export default function AdminPage() {
           description="Welcome to the admin page."
           icon={Icons.shieldCheck}
         />
-        <div className='grid grid-cols-1 md:grid-cols-4 gap-6'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
           <Link href="/admin/users">
             <Card className='max-w-sm hover:scale-105 transition-all'>
               <CardHeader>

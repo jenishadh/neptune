@@ -1,13 +1,9 @@
 import Link from 'next/link'
-import { Heart } from 'lucide-react'
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
-import { SongSchema } from '@/features/songs/schemas'
-
-type RecommendedSongsProps = {
-  songs: SongSchema[]
-}
+import { RecommendedSongsProps } from '@/features/songs/schemas'
+import { Icons } from '@/components/icons'
 
 export function RecommendedSongs({ songs }: RecommendedSongsProps) {
 
@@ -16,14 +12,14 @@ export function RecommendedSongs({ songs }: RecommendedSongsProps) {
       <Card className="bg-white border-gray-200">
         <CardHeader>
           <CardTitle className="text-gray-900 flex items-center gap-2">
-            <Heart className="w-5 h-5" fill="red" stroke="red" />
+            <Icons.heart className="w-5 h-5" fill="red" stroke="red" />
             Recommended Songs
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           {songs.length === 0 ? (
             <div className="text-center py-12">
-              <Heart className="w-12 h-12 text-gray-300 mx-auto mb-4" fill="red" stroke="red" />
+              <Icons.heart className="w-12 h-12 text-gray-300 mx-auto mb-4" fill="red" stroke="red" />
               <p className="text-gray-500 text-lg mb-2">No saved songs yet</p>
               <p className="text-gray-400 text-sm">Start recognizing music and save your favorites!</p>
             </div>

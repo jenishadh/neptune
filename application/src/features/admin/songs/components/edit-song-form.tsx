@@ -1,9 +1,11 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { toast } from "sonner"
 
 import { Alert, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
@@ -18,24 +20,10 @@ import {
 import { Input } from "@/components/ui/input"
 import { Icons } from "@/components/icons"
 import { Card, CardContent } from "@/components/ui/card"
-import { songSchema } from "@/features/admin/songs/schemas"
-import { useRouter } from "next/navigation"
-import { Header } from "@/components/header"
-import { toast } from "sonner"
-import { updateSong } from "@/features/admin/songs/actions"
 
-type EditSongFormProps = {
-  data: {
-    id: string
-    title: string
-    artist: string
-    album: string
-    genre: string
-    year: string
-    duration: string
-    url: string
-  }
-}
+import { EditSongFormProps, songSchema } from "@/features/admin/songs/schemas"
+import { Header } from "@/components/header"
+import { updateSong } from "@/features/admin/songs/actions"
 
 export function EditSongForm({ data }: EditSongFormProps) {
   const router = useRouter()

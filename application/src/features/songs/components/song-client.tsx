@@ -10,23 +10,10 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Icons } from "@/components/icons";
+
 import { save } from "@/features/songs/actions";
 import { remove } from "@/features/songs/actions";
-
-type SongClientProps = {
-  song: {
-    id: string;
-    userId: string;
-    title: string;
-    artist: string;
-    album: string;
-    year: string;
-    duration: string;
-    genre: string;
-    url: string;
-  };
-  isAlreadySaved: boolean;
-};
+import { SongClientProps } from "@/features/songs/schemas";
 
 export default function SongClient({ song, isAlreadySaved }: SongClientProps) {
   const [isPending, startTransition] = useTransition();

@@ -50,3 +50,14 @@ export type CellActionProps = {
 export type UserClientProps = {
   data: UserColumn[]
 }
+
+export type EditUserFormProps = {
+  data: {
+    id: string
+    name: string
+    email: string
+    role: "user" | "admin"
+    createdAt: string
+    updatedAt: string
+  }
+}

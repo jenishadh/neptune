@@ -28,19 +28,9 @@ import { Input } from "@/components/ui/input"
 import { Icons } from "@/components/icons"
 import { Card, CardContent } from "@/components/ui/card"
 import { Header } from "@/components/header"
-import { editUserSchema } from "@/features/admin/users/schemas"
-import { updateUser } from "@/features/admin/users/actions"
 
-type EditUserFormProps = {
-  data: {
-    id: string
-    name: string
-    email: string
-    role: "user" | "admin"
-    createdAt: string
-    updatedAt: string
-  }
-}
+import { EditUserFormProps, editUserSchema } from "@/features/admin/users/schemas"
+import { updateUser } from "@/features/admin/users/actions"
 
 export function EditUserForm({ data }: EditUserFormProps) {
   const router = useRouter()

@@ -13,3 +13,22 @@ export const songSchema = z.object({
 })
 
 export type SongSchema = z.infer<typeof songSchema>
+
+export type RecommendedSongsProps = {
+  songs: SongSchema[]
+}
+
+export type SongClientProps = {
+  song: {
+    id: string;
+    userId: string;
+    title: string;
+    artist: string;
+    album: string;
+    year: string;
+    duration: string;
+    genre: string;
+    url: string;
+  };
+  isAlreadySaved: boolean;
+};

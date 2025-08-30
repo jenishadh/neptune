@@ -10,7 +10,10 @@ import {
   Edit,
   Trash,
   User,
-  LogOut
+  LogOut,
+  Calendar,
+  ExternalLink, 
+  Heart
 } from "lucide-react"
 
 export const Icons = {
@@ -25,5 +28,8 @@ export const Icons = {
   edit: Edit,
   trash: Trash,
   user: User,
-  logOut: LogOut
+  logOut: LogOut,
+  calendar: Calendar,
+  externalLink: ExternalLink,
+  heart: Heart
 }

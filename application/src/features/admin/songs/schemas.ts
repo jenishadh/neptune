@@ -37,3 +37,16 @@ export type SongClientProps = {
 export const updateSongSchema = songSchema.extend({
   id: z.string(), 
 });
+
+export type EditSongFormProps = {
+  data: {
+    id: string
+    title: string
+    artist: string
+    album: string
+    genre: string
+    year: string
+    duration: string
+    url: string
+  }
+}
